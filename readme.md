@@ -11,6 +11,7 @@ Do the following:
 ```
 cd admin/tool/paratest/lib/paratest
 git submodule init
+git submodule update
 composer install
 cd -
 
