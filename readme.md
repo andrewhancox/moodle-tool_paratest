@@ -14,10 +14,6 @@ git submodule init
 git submodule update
 composer install
 cd -
-
-php admin/tool/paratest/cli/init.php
-
-php admin/tool/phpunit/cli/util.php --buildcomponentconfigs
 ```
 Add the following to config.php, immediately before:
 `require_once(dirname(__FILE__) . '/lib/setup.php');`
@@ -30,7 +26,12 @@ $CFG->phpunit_paraunit_processes = 10;
 
 require_once(dirname(__FILE__) . '/lib/setup.php');
 ```
+Intialise the PHPUnit site:
+```
+php admin/tool/paratest/cli/init.php
 
+php admin/tool/phpunit/cli/util.php --buildcomponentconfigs
+```
 You can now run phpunit config files in parallel. Enjoy!
 
 `./admin/tool/paratest/lib/paratest/bin/paratest --processes=10 --verbose --configuration /Users/andrewhancox/www/moodle45raw/mod/assign/phpunit.xml`
