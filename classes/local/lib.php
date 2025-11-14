@@ -23,6 +23,8 @@
  */
 
 namespace tool_paratest\local;
+use phpunit_util;
+
 class lib {
     public static function confighook(): void {
         global $CFG;
@@ -60,6 +62,8 @@ class lib {
 
         while (self::checkallprocs($procs)) {
         }
+
+        phpunit_util::build_config_file();
     }
 
     private static function checkallprocs($procs) {
