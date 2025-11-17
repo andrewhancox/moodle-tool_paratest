@@ -57,13 +57,11 @@ class lib {
         for ($i = 0; $i <= $CFG->phpunit_paraunit_processes; $i++) {
             $phpexec = empty($CFG->pathtophp) ? 'php' : $CFG->pathtophp;
             $pathtoinitscript = dirname(__FILE__) . "/../../../phpunit/cli/init.php";
-            $procs[] = proc_open("export TEST_TOKEN=$i && $phpexec $pathtoinitscript &", [STDIN, STDOUT, STDOUT], $unused);
+            $procs[] = proc_open("export TEST_TOKEN=$i && $phpexec $pathtoinitscript", [STDIN, STDOUT, STDOUT], $unused);
         }
 
         while (self::checkallprocs($procs)) {
         }
-
-        phpunit_util::build_config_file();
     }
 
     private static function checkallprocs($procs) {
