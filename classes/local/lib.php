@@ -23,7 +23,6 @@
  */
 
 namespace tool_paratest\local;
-use phpunit_util;
 
 class lib {
     public static function confighook(): void {
@@ -54,14 +53,29 @@ class lib {
         }
 
         $procs = [];
-        for ($i = 0; $i <= $CFG->phpunit_paraunit_processes; $i++) {
+        for ($i = 0; $i < $CFG->phpunit_paraunit_processes; $i++) {
             $phpexec = empty($CFG->pathtophp) ? 'php' : $CFG->pathtophp;
             $pathtoinitscript = dirname(__FILE__) . "/../../../phpunit/cli/init.php";
             $procs[] = proc_open("export TEST_TOKEN=$i && $phpexec $pathtoinitscript", [STDIN, STDOUT, STDOUT], $unused);
         }
 
-        while (self::checkallprocs($procs)) {
+        echo $CFG->phpunit_paraunit_processes . " Threads started\n";
+
+        $lastvalue = $CFG->phpunit_paraunit_processes;
+        while (true) {
+            $newvalue = self::checkallprocs($procs);
+
+            if ($lastvalue === null || $newvalue < $lastvalue) {
+                echo $newvalue . " Threads pending\n";
+                $lastvalue = $newvalue;
+            }
+
+            if ($newvalue == 0) {
+                break;
+            }
         }
+
+        echo "All threads completed\n";
     }
 
     private static function checkallprocs($procs) {
