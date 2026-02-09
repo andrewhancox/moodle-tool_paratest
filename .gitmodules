@@ -1,3 +1,0 @@
-[submodule "lib/paratest"]
-	path = lib/paratest
-	url = https://github.com/paratestphp/paratest.git

@@ -1,0 +1,19 @@
+{
+  "require": {
+    "wikimedia/composer-merge-plugin": "dev-master",
+    "brianium/paratest": "v6.8.1"
+  },
+  "extra": {
+    "merge-plugin": {
+      "require": [
+        "../../../composer.json"
+      ]
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "wikimedia/composer-merge-plugin": true,
+      "brianium/paratest": true
+    }
+  }
+}
