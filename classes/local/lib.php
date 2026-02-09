@@ -43,6 +43,11 @@ class lib {
 
         $CFG->phpunit_prefix = "phpu{$testtoken}_";
         $CFG->phpunit_dataroot .= $testtoken;
+
+        // Moodle core relies on PHPUnit to include the composer autoloader, but the first one it will find belongs to
+        // Paratest so we need to include Moodle's here.
+        // Ugly way to get the path but CFG->dirroot isn't available when this code runs so no choice.
+        require_once(dirname(__FILE__) . '/../../../../../vendor/autoload.php');
     }
 
     public static function init(): void {
