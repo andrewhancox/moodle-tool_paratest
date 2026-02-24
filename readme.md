@@ -1,17 +1,10 @@
 # To Install it #
 
-Pre-requisites:
-* PHP 8.1 - there's all kinds of version shenanigans going on here that you don't want to get bogged down in.
-* Working install of Composer
-* pcov needs to be installed, I used PECL...
-
 Dump the contents of this folder into `admin/tool/paratest`
 
 Do the following:
 ```
 cd admin/tool/paratest/lib/paratest
-git submodule init
-git submodule update
 composer install
 cd -
 ```
